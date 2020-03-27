@@ -4,6 +4,8 @@ Simple open source design for 3D printing that allows you to open door without t
 
 The design has been created with [OpenSCAD](https://www.openscad.org/). Please submit any fixes or improvements as GitHub pull requests.
 
+Set variable `is3D` to `false` and render in OpenSCAD to switch to 2D model appropriate for laser cutting. The repository contains SVG and PDF files for the 2D model. The SVG has been exported from OpenSCAD and modified with another free and open source tool [InkScape](https://inkscape.org/).
+
 # License
 
 The project is released under the [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/).
