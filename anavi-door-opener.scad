@@ -1,7 +1,10 @@
 // ANAVI Door Opener 
 
 // Set to false to change the design for left hand
-isForRightHand=true;
+isForRightHand = true;
+
+// Set to false to change to 2D which is appropriate for laser cutting
+is3D = true;
 
 module roundedSquare( width, length, radiusCorner ) 
 {
@@ -17,17 +20,15 @@ module roundedSquare( width, length, radiusCorner )
 
 module makeHanger()
 {
+	// Add a small sticking out part with edge for rotating knobs
 	linear_extrude(height = 8, center = false, convexity = 10, twist = 0)
 	translate([2,30.8])
 		rotate([0,0,45])
 			square([10,3],false);
 }
 
-module makeOpenerBase()
+module drawOpenerBase()
 {
-	//Make it 3D
-	linear_extrude(height = 5, center = false, convexity = 10, twist = 0)
-
 	difference()
 	{
 		union()
@@ -69,17 +70,35 @@ module makeOpenerBase()
 	}
 }
 
-module makeDoorOpener( rightHand )
+module makeOpenerBase()
 {
-	makeOpenerBase();
-	if (true == rightHand)
+	//Make it 3D
+	if ( true == is3D)
 	{
-		translate([0,0,-3])
-			makeHanger();
+		linear_extrude(height = 5, center = false, convexity = 10, twist = 0)
+			drawOpenerBase();
 	}
 	else
 	{
-		makeHanger();
+			drawOpenerBase();
+	}
+}
+
+module makeDoorOpener( rightHand )
+{
+	makeOpenerBase();
+	// Add the the hanger only for the 3D model
+	if ( true  == is3D )
+	{
+		if (true == rightHand)
+		{
+			translate([0,0,-3])
+				makeHanger();
+		}
+		else
+		{
+			makeHanger();
+		}
 	}
 }
 
